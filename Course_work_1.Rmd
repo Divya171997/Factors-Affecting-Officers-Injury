@@ -1,0 +1,114 @@
+---
+title: "Factors affecting Officer injury"
+output:
+  word_document: default
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Introduction
+While serving the country at the type of criminal activities lots of officers are injured every year.So in order to keep an eye on the injuries, we are analyzing the factors affecting injuries within the year so that it can be considered and reduces with time .We have decided to analyze the data because rate of injury could have an affect on the security of the country by having less number of officers to tackle the crime.I have assumed the hypothesis that do the division,month and gender factors affect the number of officer injured?It proves that the factors affecting the injured rate of the officer are more prone to male  as compared to the female. In some months of the year, it is witnessed that injury rate become high due to the new year and festival ocassions.The descriptive stastics is done on the data picked from the kaggle and is designed to solve the purpose behind the analysis.The data is downloaded from Kaggle,located in folder Dept37-0049.The dataset contains information related to     incident happenend,officer details,criminal details of offence,geographical area of crime,details of extra force if required.
+
+Ho: None of the factors affecting the rate of injury.
+
+```{r echo=FALSE}
+data <- read.csv("C:/Users/HP/Desktop/dataset.csv",header=TRUE)
+dat37=data
+dataset=dat37[-1,]
+#dataset
+#str(dataset)
+#summary(dataset)
+#attach(dataset)
+```
+
+```{r echo=FALSE}
+#names(dataset)
+#dataset
+#str(dataset)
+#summary(dataset)
+```
+## One Dependent and three Independent variable
+```{r echo=FALSE}
+# Summary to see average
+#Descriptibve Stastics of chosen variables
+  #a.tabulation of the variables
+#  table(dataset$OFFICER_GENDER)
+ # table(dataset$OFFICER_INJURY)
+ # table(dataset$DIVISION)
+ # table(dataset$INCIDENT_DATE)
+  
+#b. Percentage of officer who got injured in the crime in each catagoray
+ # round(100*prop.table(table(dataset$OFFICER_GENDER)),2)
+  #round(100*prop.table(table(dataset$OFFICER_INJURY)),2)
+  #round(100*prop.table(table(dataset$DIVISION)),2)
+  
+#Visualization
+
+    # Plot data
+    #plot(dataset$OFFICER_GENDER)
+    #plot(dataset$INCIDENT_DATE)
+    #plot(dataset$OFFICER_INJURY)
+    #plot(dataset$DIVISION)
+
+    # Histogram of the data
+    #hist(table(dataset$OFFICER_GENDER))
+    #hist(table(dataset$INCIDENT_DATE))
+    #hist(table(dataset$OFFICER_INJURY))
+    #hist(table(dataset$DIVISION))
+
+    #Barplots
+   # barplot(table(dataset$OFFICER_GENDER))
+   # barplot(table(dataset$INCIDENT_DATE))
+   # barplot(table(dataset$OFFICER_INJURY))
+   # barplot(table(dataset$DIVISION))
+
+   #Cross Tabulations
+   table(dataset$OFFICER_INJURY,dataset$DIVISION)
+   table(dataset$OFFICER_INJURY,dataset$OFFICER_GENDER)
+   #table(dataset$OFFICER_INJURY,dataset$INCIDENT_DATE)
+
+#bar plots for cross-table
+#Visualization
+barplot(table(dataset$OFFICER_INJURY,dataset$DIVISION),col=c("blue"),main="MOST DANGEROUS AREA FOR OFFICERS",ylim=c(0,1000),xlab ="DIVISIONS",ylab = "INJURY RATE")
+
+barplot(table(dataset$OFFICER_INJURY,dataset$OFFICER_GENDER),col=c("blue","red"),main="GENDER AFFECT ON INJURY RATE",ylim=c(0,1000),xlab ="GENDER",ylab = "INJURY RATE")
+
+barplot(table(dataset$OFFICER_INJURY,dataset$INCIDENT_DATE),col=c("blue","red"),main="MOST CRITICAL MONTH IN 2016",ylim=c(0,5),xlim=c(0,10),
+          xlab ="Date",ylab = "INJURY RATE")
+
+#scatter plot of INJURY vs DIVISION
+
+library(ggplot2)
+library(breakDown)
+# head(dataset)
+ #ggplot(data=dataset,aes(x=dataset$DIVISION,y=dataset$OFFICER_INJURY,color =as.factor(left)))+geom_point(color="Skyblue",alpha=0.7,size=3)
+
+ #scatter plot of INJURY vs GENDER
+#ggplot(data=dataset,aes(x=dataset$OFFICER_GENDER,y=dataset$OFFICER_INJURY,color =as.factor(left)))+geom_point(color="Skyblue",alpha=0.7,size=3)
+
+#scatter plot of INJURY vs DATE
+#ggplot(data=dataset,aes(x=dataset$INCIDENT_DATE,y=dataset$OFFICER_INJURY,color =as.factor(left)))+geom_point(color="Skyblue",alpha=0.7,size=3)
+ 
+#Proportiions
+100*round(prop.table(table(dataset$OFFICER_GENDER,dataset$OFFICER_INJURY)),3)
+#100*round(prop.table(table(dataset$INCIDENT_DATE,dataset$OFFICER_INJURY)),3)
+100*round(prop.table(table(dataset$DIVISION,dataset$OFFICER_INJURY)),3)
+```
+## INTERESTING QUESTIONS
+In Which area should officers take exra care? and why?
+By analyzing the data from INJURY vs DIVISION bar plot we came up with the solution that central and southeast       part of uk are need extra care because majority of the injuries with the officers occurred in this area only.
+
+What are the percentage of of female to male officers injury?
+By analyzing the gender vs injury plot I came up with a conclusion that there is a distribution of injuries among male with a proportion of 8.5 while that of female with 1.3.
+   
+Which is the area which has zero percent harm on injuries?
+By analyzing the injury vs division graph i came up with an outcome that division are between two parts central and non-central is the only part of the country which has no crime rate.
+
+Which months needs more officers to be in duty ?
+After analyzing the date with injury I have interpreted that some ofthe months have higher rate of injury which proofs that it need more officer assistant to make that country more safer.
+
+## Conclusion
+Looking at the data, it clearly indicates via the bar plot that there has been an direct realtionship between distribution and officer injurity . However, if we look at the data in more detail month by month there is some very interesting points to not that in festival months more officers are injured with a range from 50 to 70. If we look at the interval there was a considerable decrease in the amount of crimes from januray to may but suddenly in may there has been immense increase in injury rate. After may,again there was an immense decrease observed untill august  but followed another two-month positive increase.The graph clearly shows some fluctuations within the data for injury rate, however due to the huge increment in january ,may and septempber,it can be predicted that large proprtion of crime are committed in festival month by analyzing the injury rate of officers. After considering various factors for analysing injuries like gender,month,division for officers in uk,we came up with stastical diagram which really highlights the increasing risk of officers life while doing their duty.To improve our surroundings we need to  higlighte this major issue among the people and governement so that it can take serious measures to control the rate of attacks on officers and will adopt more strict rules and regualtions to decrease the crime rate.For preventing this increasing injuries, goverment should avail more advanced posessions to the officers so that they can have their self defence with hundred percent efficiency.
